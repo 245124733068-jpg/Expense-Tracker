@@ -7,8 +7,7 @@ const navLinks = document.querySelectorAll('.navigation a');
 const sections = document.querySelectorAll('.section');
 
 function showSection(id) {
-
-    sections.forEach(function (section) {
+    sections.forEach(section => {
         section.classList.remove('active-section');
     });
 
@@ -19,14 +18,11 @@ function showSection(id) {
     }
 }
 
-navLinks.forEach(function (link) {
-
+navLinks.forEach(link => {
     link.addEventListener('click', function (e) {
-
         e.preventDefault();
 
         const targetId = link.getAttribute('href').replace('#', '');
-
         showSection(targetId);
     });
 });
@@ -34,7 +30,6 @@ navLinks.forEach(function (link) {
 const homeBtn = document.getElementById('home-btn');
 
 if (homeBtn) {
-
     homeBtn.addEventListener('click', function () {
         showSection('dashboard');
     });
@@ -47,25 +42,9 @@ showSection('home');
 // TRANSACTION DATA
 // ==========================================
 
-function loadTransactions() {
+let transactions = [];
 
-    try {
-
-        const savedData = localStorage.getItem('transactions');
-
-        const parsedData = savedData ? JSON.parse(savedData) : [];
-
-        return Array.isArray(parsedData) ? parsedData : [];
-
-    } catch (error) {
-
-        console.error('Error loading transactions:', error);
-
-        return [];
-    }
-}
-
-let transactions = loadTransactions();
+const API_URL = 'transactions';
 
 
 // ==========================================
@@ -73,17 +52,12 @@ let transactions = loadTransactions();
 // ==========================================
 
 const transactionForm = document.getElementById('transaction-form');
-
 const transactionList = document.getElementById('transaction-list');
 
 const amountInput = document.getElementById('amount');
-
 const categoryInput = document.getElementById('category');
-
 const typeInput = document.getElementById('type');
-
 const descriptionInput = document.getElementById('description');
-
 const dateInput = document.getElementById('date');
 
 
@@ -92,40 +66,17 @@ const dateInput = document.getElementById('date');
 // ==========================================
 
 function formatCurrency(num) {
-
-    return '₹ ' + Math.abs(num).toFixed(2);
+    return '₹ ' + Math.abs(Number(num)).toFixed(2);
 }
 
 function formatDate(dateStr) {
-
-    if (!dateStr) {
-        return '';
-    }
+    if (!dateStr) return '';
 
     const parts = dateStr.split('-');
 
-    if (parts.length !== 3) {
-        return dateStr;
-    }
+    if (parts.length !== 3) return dateStr;
 
     return parts[2] + '-' + parts[1] + '-' + parts[0];
-}
-
-function saveTransactions() {
-
-    try {
-
-        localStorage.setItem(
-            'transactions',
-            JSON.stringify(transactions)
-        );
-
-    } catch (error) {
-
-        console.error('Error saving transactions:', error);
-
-        alert('Unable to save transactions in browser storage.');
-    }
 }
 
 
@@ -134,19 +85,13 @@ function saveTransactions() {
 // ==========================================
 
 function updateSummary() {
-
     let income = 0;
-
     let expense = 0;
 
-    transactions.forEach(function (t) {
-
+    transactions.forEach(t => {
         if (t.type === 'income') {
-
             income += Number(t.amount);
-
         } else {
-
             expense += Number(t.amount);
         }
     });
@@ -163,17 +108,14 @@ function updateSummary() {
         document.querySelector('.expense-card .card-text p');
 
     if (balanceElement) {
-
         balanceElement.textContent = formatCurrency(balance);
     }
 
     if (incomeElement) {
-
         incomeElement.textContent = formatCurrency(income);
     }
 
     if (expenseElement) {
-
         expenseElement.textContent = formatCurrency(expense);
     }
 }
@@ -184,9 +126,7 @@ function updateSummary() {
 // ==========================================
 
 function renderTransactionItem(t) {
-
     const li = document.createElement('li');
-
     li.className = 'transaction-item';
 
     const dotClass =
@@ -199,24 +139,18 @@ function renderTransactionItem(t) {
         t.type === 'income' ? '+ ' : '- ';
 
     const categoryLabel =
-        t.category.charAt(0).toUpperCase() + t.category.slice(1);
-
+        String(t.category || '').charAt(0).toUpperCase() +
+        String(t.category || '').slice(1);
 
     // Transaction dot
-
     const dot = document.createElement('span');
-
     dot.className = 'dot ' + dotClass;
 
-
     // Transaction information
-
     const info = document.createElement('div');
-
     info.className = 'transaction-info';
 
     const name = document.createElement('p');
-
     name.className = 'transaction-name';
 
     name.textContent =
@@ -224,77 +158,38 @@ function renderTransactionItem(t) {
         (t.description ? ' - ' + t.description : '');
 
     const date = document.createElement('p');
-
     date.className = 'transaction-date';
-
     date.textContent = formatDate(t.date);
 
     info.appendChild(name);
-
     info.appendChild(date);
 
-
     // Transaction amount
-
     const amount = document.createElement('span');
-
     amount.className = 'transaction-amount ' + amountClass;
-
-    amount.textContent = sign + formatCurrency(Number(t.amount));
-
+    amount.textContent = sign + formatCurrency(t.amount);
 
     // Delete button
-
     const deleteBtn = document.createElement('button');
-
     deleteBtn.className = 'delete-btn';
-
     deleteBtn.title = 'Delete transaction';
 
     const deleteIcon = document.createElement('img');
-
     deleteIcon.src = 'images/delete.png';
-
     deleteIcon.alt = 'delete';
 
     deleteBtn.appendChild(deleteIcon);
 
     deleteBtn.addEventListener('click', function () {
-
         deleteTransaction(t.id);
     });
 
-
-    // Append all elements
-
     li.appendChild(dot);
-
     li.appendChild(info);
-
     li.appendChild(amount);
-
     li.appendChild(deleteBtn);
 
     return li;
-}
-
-
-// ==========================================
-// DELETE TRANSACTION
-// ==========================================
-
-function deleteTransaction(id) {
-
-    transactions = transactions.filter(function (t) {
-
-        return t.id !== id;
-    });
-
-    saveTransactions();
-
-    renderAllTransactions();
-
-    updateSummary();
 }
 
 
@@ -303,49 +198,55 @@ function deleteTransaction(id) {
 // ==========================================
 
 function renderAllTransactions() {
-
-    if (!transactionList) {
-        return;
-    }
+    if (!transactionList) return;
 
     transactionList.innerHTML = '';
 
-    // Newest transactions appear first
-
-    transactions
-        .slice()
-        .reverse()
-        .forEach(function (t) {
-
-            transactionList.appendChild(
-                renderTransactionItem(t)
-            );
-        });
+    transactions.forEach(t => {
+        transactionList.appendChild(
+            renderTransactionItem(t)
+        );
+    });
 }
 
 
 // ==========================================
-// ADD TRANSACTION
+// LOAD TRANSACTIONS FROM MYSQL
+// ==========================================
+
+async function loadTransactions() {
+    try {
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error('Unable to load transactions.');
+        }
+
+        transactions = await response.json();
+
+        renderAllTransactions();
+        updateSummary();
+
+    } catch (error) {
+        console.error('Loading error:', error);
+        alert('Unable to load transactions from the database.');
+    }
+}
+
+
+// ==========================================
+// ADD TRANSACTION TO MYSQL
 // ==========================================
 
 if (transactionForm) {
-
-    transactionForm.addEventListener('submit', function (e) {
-
+    transactionForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
         const amount = parseFloat(amountInput.value);
-
         const category = categoryInput.value;
-
         const type = typeInput.value;
-
         const description = descriptionInput.value.trim();
-
         const date = dateInput.value;
-
-
-        // Validation
 
         if (
             !Number.isFinite(amount) ||
@@ -354,55 +255,161 @@ if (transactionForm) {
             !type ||
             !date
         ) {
-
             alert(
                 'Please fill in Amount, Category, Type, and Date.'
             );
-
             return;
         }
 
+        const formData = new URLSearchParams();
 
-        // Create transaction object
+        formData.append('action', 'add');
+        formData.append('amount', amount);
+        formData.append('category', category);
+        formData.append('type', type);
+        formData.append('description', description);
+        formData.append('date', date);
 
-        const newTransaction = {
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type':
+                        'application/x-www-form-urlencoded'
+                },
+                body: formData
+            });
 
-            id: Date.now(),
+            if (!response.ok) {
+                throw new Error(await response.text());
+            }
 
-            amount: amount,
+            transactionForm.reset();
 
-            category: category,
+            await loadTransactions();
 
-            type: type,
+            alert('Transaction added successfully!');
 
-            description: description,
-
-            date: date
-        };
-
-
-        // Save transaction
-
-        transactions.push(newTransaction);
-
-        saveTransactions();
-
-        renderAllTransactions();
-
-        updateSummary();
-
-
-        // Reset form
-
-        transactionForm.reset();
+        } catch (error) {
+            console.error('Add transaction error:', error);
+            alert('Unable to add transaction. ' + error.message);
+        }
     });
 }
 
 
 // ==========================================
+// DELETE TRANSACTION FROM MYSQL
+// ==========================================
+
+async function deleteTransaction(id) {
+    if (!confirm('Are you sure you want to delete this transaction?')) {
+        return;
+    }
+
+    const formData = new URLSearchParams();
+
+    formData.append('action', 'delete');
+    formData.append('transactionId', id);
+
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type':
+                    'application/x-www-form-urlencoded'
+            },
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error(await response.text());
+        }
+
+        await loadTransactions();
+
+        alert('Transaction deleted successfully!');
+
+    } catch (error) {
+        console.error('Delete transaction error:', error);
+        alert('Unable to delete transaction. ' + error.message);
+    }
+}
+
+
+
+
+// ==========================================
+// USER SESSION, WELCOME MESSAGE AND LOGOUT
+// ==========================================
+
+async function checkLoginSession() {
+    try {
+        const response = await fetch('auth', {
+            method: 'GET',
+            credentials: 'same-origin'
+        });
+
+        if (response.status === 401) {
+            window.location.replace('login.html');
+            return false;
+        }
+
+        if (!response.ok) {
+            throw new Error('Unable to verify login session.');
+        }
+
+        const user = await response.json();
+        const welcomeElement = document.getElementById('welcome-user');
+
+        if (welcomeElement) {
+            welcomeElement.textContent = `Welcome, ${user.userName}! 😊`;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Session check error:', error);
+        alert('Unable to verify your login. Please log in again.');
+        window.location.replace('login.html');
+        return false;
+    }
+}
+
+const logoutButton = document.getElementById('logout-btn');
+
+if (logoutButton) {
+    logoutButton.addEventListener('click', async function () {
+        if (!confirm('Are you sure you want to log out?')) return;
+
+        const formData = new URLSearchParams();
+        formData.append('action', 'logout');
+
+        try {
+            const response = await fetch('auth', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData
+            });
+
+            if (!response.ok) throw new Error('Logout failed.');
+            window.location.replace('login.html');
+        } catch (error) {
+            console.error('Logout error:', error);
+            alert('Unable to log out. Please try again.');
+        }
+    });
+}
+
+// ==========================================
 // INITIALIZE APPLICATION
 // ==========================================
 
-renderAllTransactions();
-
-updateSummary();
+(async function initializeApplication() {
+    const loggedIn = await checkLoginSession();
+    if (loggedIn) {
+        await loadTransactions();
+    }
+})();

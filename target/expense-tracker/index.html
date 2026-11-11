@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Track your Expenses Here</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <ul class="navbar">
+            <ul class="brand">
+                <li><img src="images/logo.png" alt="logo"></li>
+                <li>
+                    <h1>Expense Tracker</h1>
+                </li>
+            </ul>
+            <ul class="navigation">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><span id="welcome-user">Welcome! 😊</span></li>
+                <li><button id="logout-btn" type="button">Logout</button></li>
+            </ul>
+        </ul>
+    </header>
+
+    <main>
+        <!-- HOME SECTION -->
+        <div id="home" class="section active-section">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h2>Track Your Expenses</h2>
+                    <p>Manage your money. Build a better future.</p>
+                </div>
+                <img src="images/expense-dashboard.png" alt="expense dashboard image">
+            </div>
+
+            <div class="home-highlights">
+                <div class="highlight-card">
+                    <h3>Track Every Rupee</h3>
+                    <p>Log income and expenses in seconds and always know exactly where your money goes.</p>
+                </div>
+
+                <div class="highlight-card">
+                    <h3>Instant Insights</h3>
+                    <p>Your balance, income, and expenses update automatically the moment you add a transaction.</p>
+                </div>
+
+                <div class="highlight-card">
+                    <h3>Build Better Habits</h3>
+                    <p>A clear history of your spending helps you plan ahead and save with confidence.</p>
+                </div>
+            </div>
+
+            <div class="home-cta">
+                <h3>Ready to take control of your finances?</h3>
+                <p>Join and start tracking your money the smart way — completely free.</p>
+                <button id="home-btn">Start Tracking</button>
+            </div>
+        </div>
+
+        <!-- DASHBOARD SECTION -->
+        <div id="dashboard" class="section">
+
+            <div class="summary-section">
+                <div class="summary-card balance-card">
+                    <img src="images/balance.png" alt="balance icon" class="card-icon">
+                    <div class="card-text">
+                        <h3>Total Balance</h3>
+                        <p>₹ 0.00</p>
+                    </div>
+                </div>
+
+                <div class="summary-card income-card">
+                    <img src="images/income.png" alt="income icon" class="card-icon">
+                    <div class="card-text">
+                        <h3>Total Income</h3>
+                        <p>₹ 0.00</p>
+                    </div>
+                </div>
+
+                <div class="summary-card expense-card">
+                    <img src="images/expense.png" alt="expense icon" class="card-icon">
+                    <div class="card-text">
+                        <h3>Total Expenses</h3>
+                        <p>₹ 0.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="transaction-section">
+
+                <div class="add-transaction-panel">
+                    <h3>Add Transaction</h3>
+
+                    <form id="transaction-form">
+                        <input type="number" id="amount" placeholder="Amount">
+
+                        <select id="category">
+                            <option value="" disabled selected>Category</option>
+                            <option value="salary">Salary</option>
+                            <option value="food">Food</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="other">Other</option>
+                        </select>
+
+                        <select id="type">
+                            <option value="" disabled selected>Type (Income / Expense)</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                        </select>
+
+                        <input type="text" id="description" placeholder="Description">
+                        <input type="date" id="date">
+
+                        <button type="submit" id="add-transaction-btn">
+                            Add Transaction
+                        </button>
+                    </form>
+                </div>
+
+                <div class="transaction-history-panel">
+                    <h3>Transaction History</h3>
+
+                    <ul id="transaction-list">
+                        <!-- Transaction items will be dynamically added here -->
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ABOUT SECTION -->
+        <div id="about" class="section">
+            <div class="about-section">
+
+                <div class="about-intro">
+                    <div class="about-text">
+                        <h2>About Expense Tracker</h2>
+
+                        <p>
+                            Expense Tracker is a simple tool built to help you manage your money with ease.
+                            Track your income and expenses, monitor your balance in real time, and build
+                            better financial habits — all in one place.
+                        </p>
+
+                        <p>
+                            Whether you're saving for a goal, trying to cut down unnecessary spending,
+                            or just want a clear picture of where your money goes each month,
+                            Expense Tracker keeps everything organized in one clean dashboard —
+                            no spreadsheets, no confusion.
+                        </p>
+                    </div>
+
+                    <img src="images/about-illustration.png"
+                         alt="about illustration"
+                         class="about-image">
+                </div>
+
+                <div class="about-features">
+                    <div class="feature-card">
+                        <h3>Simple & Fast</h3>
+                        <p>
+                            Add transactions in seconds with an easy-to-use interface
+                            designed for quick, everyday use.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Clear Overview</h3>
+                        <p>
+                            See your total balance, income, and expenses at a glance,
+                            updated instantly as you add entries.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>Stay Organized</h3>
+                        <p>
+                            Keep a complete, searchable history of every transaction
+                            you make, sorted by date and category.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <h3>100%</h3>
+                        <p>Free to Use</p>
+                    </div>
+
+                    <div class="stat-item">
+                        <h3>24/7</h3>
+                        <p>Access Anywhere</p>
+                    </div>
+
+                    <div class="stat-item">
+                        <h3>0</h3>
+                        <p>Learning Curve</p>
+                    </div>
+
+                    <div class="stat-item">
+                        <h3>&#8377;</h3>
+                        <p>Built for INR Users</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CONTACT SECTION -->
+        <div id="contact" class="section">
+            <div class="contact-section">
+
+                <div class="contact-info">
+                    <h2>Get In Touch</h2>
+
+                    <p>
+                        Have a question, feedback, or found a bug?
+                        Send a message and we'll get back to you.
+                    </p>
+
+                    <ul class="contact-details">
+                        <li>
+                            <strong>Email:</strong>
+                            sarvajithgowtham07@gmail.com
+                        </li>
+
+                        <li>
+                            <strong>Phone:</strong>
+                            +91 77803 68466
+                        </li>
+
+                        <li>
+                            <strong>Location:</strong>
+                            Hyderabad, India
+                        </li>
+                    </ul>
+                </div>
+
+                <form id="contact-form" class="contact-form">
+                    <input type="text" id="contact-name" placeholder="Your Name">
+
+                    <input type="email" id="contact-email" placeholder="Your Email">
+
+                    <textarea id="contact-message"
+                              placeholder="Your Message"
+                              rows="5"></textarea>
+
+                    <button type="submit" id="contact-submit-btn">
+                        Send Message
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Expense Tracker. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

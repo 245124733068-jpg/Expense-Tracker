@@ -562,3 +562,243 @@ footer p {
 .footer-socials a:hover img {
     opacity: 1;
 }
+
+
+/* ==========================================
+   LOGIN AND REGISTRATION
+========================================== */
+
+.auth-container {
+    min-height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.auth-card h2 {
+    margin-bottom: 10px;
+}
+
+.auth-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.auth-card input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.auth-card button {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.auth-card a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#login-message {
+    margin-top: 12px;
+}
+
+/* ==========================================
+   REGISTRATION PAGE
+   Uses existing Expense Tracker theme
+========================================== */
+
+.register-page {
+    min-height: 78vh;
+    background-color: #E2F1FC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 45px 20px;
+    box-sizing: border-box;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 450px;
+    background-color: #FFFFFF;
+    padding: 38px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(30, 41, 59, 0.12);
+    box-sizing: border-box;
+}
+
+.register-heading {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.register-heading h2 {
+    color: #0F172A;
+    font-size: 1.8rem;
+    margin: 0 0 10px;
+}
+
+.register-heading p {
+    color: #64748B;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+#register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.register-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.register-field label {
+    color: #0F172A;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.register-field input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px;
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: 0.2s;
+}
+
+.register-field input:focus {
+    border-color: #2563EB;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+#register-btn {
+    background-color: #2563EB;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: 0.2s;
+}
+
+#register-btn:hover {
+    background-color: #1D4ED8;
+    transform: translateY(-1px);
+}
+
+#register-message {
+    text-align: center;
+    font-size: 0.9rem;
+    margin: 12px 0 0;
+}
+
+.register-login {
+    text-align: center;
+    color: #64748B;
+    font-size: 0.92rem;
+    margin-top: 23px;
+    padding-top: 20px;
+    border-top: 1px solid #E2E8F0;
+}
+
+.register-login a {
+    color: #2563EB;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-login a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+    .register-card {
+        padding: 25px 20px;
+    }
+
+    .register-heading h2 {
+        font-size: 1.5rem;
+    }
+}
+
+
+/* ==========================================
+   USER WELCOME AND LOGOUT
+========================================== */
+
+.navigation {
+    gap: 24px;
+    margin-right: 30px;
+    flex-wrap: wrap;
+}
+
+#welcome-user {
+    color: #FFFFFF;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+#logout-btn {
+    background-color: #EF4444;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#logout-btn:hover {
+    background-color: #DC2626;
+}
+
+/* ==========================================
+   LOGIN BUTTON
+========================================== */
+
+#login-form button {
+    background-color: #2563EB;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 13px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#login-form button:hover {
+    background-color: #1D4ED8;
+}
